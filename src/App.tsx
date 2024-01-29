@@ -1,9 +1,11 @@
+import Navbar from "./components/Navbar"
+
 function App() {
 
   return (
-    <h1>
-     Reminder App
-    </h1>
+    <>
+      <Navbar />
+    </>
   )
 }
 
