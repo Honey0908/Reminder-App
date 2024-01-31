@@ -4,6 +4,7 @@ import Form from '../Form';
 import { TASK_FORM } from '../../constants/formData';
 import { TaskContext } from '../../context/task/TaskContext';
 import { v4 as uuidV4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 const TaskForm = () => {
     const { dispatch } = useContext(TaskContext)
@@ -20,6 +21,7 @@ const TaskForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch({ "type": "ADD_TASK", "payload": { ...taskData, id: uuidV4() } })
+        toast.success("Task Created Successfully");
         setTaskData({ title: '', description: '', completed: false });
         setIsOpen(false);
     };

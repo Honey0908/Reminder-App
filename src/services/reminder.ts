@@ -22,10 +22,10 @@ export const createReminder = async (data: Omit<Reminder, "id">, userId: string)
                     },
                 }
             )
-            return (response.data?.id)
+            return (response.data)
         } catch (error) {
             console.error(error)
-            return;
+            return error;
         }
     }
     alert("you are offline")

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { deleteReminder } from '../../services/reminder'
 import { ReminderContext } from '../../context/reminder/ReminderContext'
+import { toast } from 'react-toastify'
 
 const Reminder: React.FC<Reminder> = ({ ...data }) => {
 
@@ -8,8 +9,13 @@ const Reminder: React.FC<Reminder> = ({ ...data }) => {
 
     const handleDelete = async (id: Reminder["id"]) => {
         // show response.status
-        await deleteReminder(id);
-        dispatch({ type: "DELETE_REMINDER", payload: id })
+        const response = await deleteReminder(id);
+        if (response.success) {
+            dispatch({ type: "DELETE_REMINDER", payload: id })
+            toast.success("Reminder Deleted Successfully")
+            return;
+        }
+        toast.error("Something Went Wrong");
     }
     return (
         <div className="flex flex-col border-primary rounded-lg shadow-sm md:w-3/4 w-full max-h-fit border bg-white p-3 md:p-4 m-2">

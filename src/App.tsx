@@ -4,6 +4,8 @@ import Home from "./pages/Home"
 import OneSignal from 'react-onesignal';
 import { useContext, useEffect } from "react";
 import { ReminderContext } from "./context/reminder/ReminderContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { dispatch } = useContext(ReminderContext);
@@ -30,7 +32,9 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Home />
+      <ToastContainer />
     </BrowserRouter>
+
   )
 }
 

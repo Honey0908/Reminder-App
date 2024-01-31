@@ -4,6 +4,7 @@ import { ReminderContext } from '../../context/reminder/ReminderContext';
 import Form from '../Form';
 import Modal from '../Modal';
 import { REMINDER_FORM } from '../../constants/formData';
+import { toast } from 'react-toastify';
 
 const ReminderForm = () => {
 
@@ -22,14 +23,16 @@ const ReminderForm = () => {
         e.preventDefault();
 
         if (state.userId) {
-            const reminderId = await createReminder(reminderData, state.userId);
-            if (reminderId) {
-                dispatch({ "type": "ADD_REMINDER", "payload": { ...reminderData, id: reminderId } })
+            const response = await createReminder(reminderData, state.userId);
+            if (response?.id) {
+                dispatch({ "type": "ADD_REMINDER", "payload": { ...reminderData, id: response?.id } })
+                toast.success("Reminder Created Successfully");
+            } else {
+                toast.error("Something Went Wrong" + response);
             }
         } else {
-            alert("User is not subscribed")
+            toast.error("User Not Subscribed")
         }
-
         setReminderData({ title: '', description: '', time: '' });
         setIsOpen(false);
     };

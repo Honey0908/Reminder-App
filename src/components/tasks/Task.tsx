@@ -1,11 +1,13 @@
 import React, { useContext } from 'react'
 import { TaskContext } from '../../context/task/TaskContext'
+import { toast } from 'react-toastify'
 
 const Task: React.FC<Task> = ({ ...data }) => {
     const { dispatch } = useContext(TaskContext)
 
     const handleDelete = (id: Task["id"]) => {
         dispatch({ type: "DELETE_TASK", payload: id })
+        toast.success("Task deleted Successfully")
     }
 
     const handleCheck = (id: Task["id"]) => {
