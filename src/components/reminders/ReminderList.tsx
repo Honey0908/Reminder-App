@@ -1,10 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Reminder from "./Reminder";
 import { ReminderContext } from "../../context/reminder/ReminderContext";
 
 const ReminderList: React.FC<{ today?: boolean }> = ({ today }) => {
-    const { state } = useContext(ReminderContext);
+    const { state, dispatch } = useContext(ReminderContext);
     const { reminders } = state;
+
+    useEffect(() => {
+        var timer = setInterval(() => removeReminder(), 1000)
+        return function cleanup() {
+            clearInterval(timer)
+        }
+    }, [reminders]);
+
+    const removeReminder = () => {
+        reminders.forEach((reminder) => {
+            if (+Date.parse(`${reminder.time}`) < Date.now()) {
+                dispatch({ type: "DELETE_REMINDER", payload: reminder.id });
+            }
+        })
+    }
 
     const renderReminders = (reminderList: Reminder[]) => {
         return reminderList.map((data) => (
