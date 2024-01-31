@@ -15,6 +15,8 @@
 
 The Reminder App is a web application designed to send push notifications for user reminders. It utilizes OneSignal for push notification services. Users also can create their daily tasks. The project is built using React and uses local storage to store data.
 
+[Demo URL](https://my-reminder-app.netlify.app/)
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
