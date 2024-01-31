@@ -7,7 +7,7 @@ import { REMINDER_FORM } from '../../constants/formData';
 
 const ReminderForm = () => {
 
-    const { dispatch } = useContext(ReminderContext)
+    const { dispatch, state } = useContext(ReminderContext)
 
     const [reminderData, setReminderData] = useState({ title: '', description: '', time: '' });
     const [isOpen, setIsOpen] = useState(false);
@@ -20,10 +20,16 @@ const ReminderForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const id = await createReminder(reminderData);
-        if (id) {
-            dispatch({ "type": "ADD_REMINDER", "payload": { ...reminderData, id: id } })
+
+        if (state.userId) {
+            const reminderId = await createReminder(reminderData, state.userId);
+            if (reminderId) {
+                dispatch({ "type": "ADD_REMINDER", "payload": { ...reminderData, id: reminderId } })
+            }
+        } else {
+            alert("User is not subscribed")
         }
+
         setReminderData({ title: '', description: '', time: '' });
         setIsOpen(false);
     };

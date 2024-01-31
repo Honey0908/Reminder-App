@@ -2,7 +2,10 @@ import localStorageService from "../../services/localStorage";
 
 const reminderReducer = (state: ReminderState, action: ReminderActionTypes): ReminderState => {
   switch (action.type) {
-    
+
+    case 'SET_USER_SUBSCRIPTION_ID':
+      return { ...state, userId: action.payload };
+
     case 'ADD_REMINDER':
       const addedReminders = [...state.reminders, action.payload];
       localStorageService.setItem("reminders", addedReminders)

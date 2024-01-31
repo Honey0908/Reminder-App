@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const base_url:string ="https://onesignal.com/api/v1/notifications"
+const base_url: string = "https://onesignal.com/api/v1/notifications"
 
-export const createReminder = async (data: Omit<Reminder, "id">) => {
+export const createReminder = async (data: Omit<Reminder, "id">, userId: string) => {
 
     if (navigator.onLine) {
         try {
@@ -13,7 +13,7 @@ export const createReminder = async (data: Omit<Reminder, "id">) => {
                     contents: { en: `${data.description}` },
                     headings: { en: `${data.title}` },
                     send_after: `${data.time.slice(0, 10)} ${data.time.slice(11, 16)}:00 GMT+0530`,
-                    included_segments: ["All"],
+                    include_player_ids: [userId]
                 },
                 {
                     headers: {

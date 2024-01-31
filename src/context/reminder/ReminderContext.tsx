@@ -10,6 +10,7 @@ export interface ReminderContextValue {
 
 const initialState: ReminderState = {
   reminders: localStorageService.getItem("reminders") as Reminder[] || [],
+  userId: ""
 };
 
 export const ReminderContext = createContext<ReminderContextValue>({
@@ -28,7 +29,6 @@ export const ReminderProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     state,
     dispatch,
   };
-
 
   return <ReminderContext.Provider value={value}>{children}</ReminderContext.Provider>;
 };
