@@ -8,7 +8,6 @@ const Reminder: React.FC<Reminder> = ({ ...data }) => {
     const { dispatch } = useContext(ReminderContext)
 
     const handleDelete = async (id: Reminder["id"]) => {
-        // show response.status
         const response = await deleteReminder(id);
         if (response.success) {
             dispatch({ type: "DELETE_REMINDER", payload: id })

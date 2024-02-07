@@ -23,7 +23,7 @@ const ReminderList: React.FC<{ today?: boolean }> = ({ today }) => {
 
     const renderReminders = (reminderList: Reminder[]) => {
         return reminderList.map((data) => (
-            <Reminder id={data?.id} time={data?.time} description={data?.description} title={data?.title} key={data.id} />
+            <Reminder {...data} key={data.id} />
         ));
     };
 

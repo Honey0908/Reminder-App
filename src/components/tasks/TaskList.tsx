@@ -7,7 +7,7 @@ const TaskList = () => {
 
     const renderTasks = (taskList: Task[]) => {
         return taskList.map((task) => (
-            <Task id={task?.id} title={task?.title} description={task?.description} completed={task?.completed} key={task?.id} />
+            <Task {...task} key={task?.id} />
         ));
     };
 
