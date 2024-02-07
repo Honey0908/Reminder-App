@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
 import { REMINDER_NAVIGATIONS } from '../constants/NavigationOptions';
 import ReminderForm from './reminders/ReminderForm';
 import TaskForm from './tasks/TaskForm';
 import { useContext } from 'react';
 import { ReminderContext } from '../context/reminder/ReminderContext';
 import { TaskContext } from '../context/task/TaskContext';
+import { NavLink } from 'react-router-dom';
 
 export default function Sidebar() {
     const { state: reminderState } = useContext(ReminderContext);
@@ -15,7 +15,7 @@ export default function Sidebar() {
 
     return (
         <>
-            <div className='flex flex-wrap'>
+            <div className='grid grid-cols-2 gap-2'>
                 {REMINDER_NAVIGATIONS.map((option: NavigationOptions) => {
 
                     const getCount = (title: NavigationOptions["title"]) => {
@@ -36,15 +36,15 @@ export default function Sidebar() {
                     };
 
                     return (
-                        <Link to={option?.to} key={option?.id} className="w-1/2 ">
-                            <div className={`m-1 border-primary shadow-sm border px-3 py-4 flex justify-between  rounded-lg`}>
+                        <NavLink to={option?.to} key={option?.id} className={({ isActive }) => isActive ? 'shadow-lg' : ''} >
+                            <div className={` border-primary shadow-sm border px-3 py-4 flex justify-between  rounded-lg`}>
                                 <div className="flex flex-col ">
                                     {option?.icon}
                                     <div className='text-danger text-xl font-bold'>{option?.title}</div>
                                 </div>
                                 <div className='text-danger font-bold text-4xl'>{getCount(option.title)}</div>
                             </div>
-                        </Link>
+                        </NavLink>
                     )
                 })}
             </div>
