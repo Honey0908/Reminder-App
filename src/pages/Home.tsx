@@ -18,7 +18,7 @@ const Home = () => {
                 <div className="md:w-7/12 overflow-auto" style={{ height: `calc(100vh - 10em)` }}>
                     <Routes>
                         <Route path="/task" element={< TaskList />}></Route>
-                        <Route path="/" element={< TaskList />}></Route>
+                        <Route path="/" element={< ReminderList />}></Route>
                         <Route path="/reminder" element={< ReminderList />}></Route>
                         <Route path="/all" element={[< ReminderList />, <TaskList />]}></Route>
                         <Route path="/today" element={< ReminderList today={true} />}></Route>
