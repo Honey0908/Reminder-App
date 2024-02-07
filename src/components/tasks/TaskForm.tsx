@@ -20,6 +20,9 @@ const TaskForm = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        console.log(taskData.description);
+
+        taskData.description = taskData.description.replace(/\n/g, '<br>');
         dispatch({ "type": "ADD_TASK", "payload": { ...taskData, id: uuidV4() } })
         toast.success("Task Created Successfully");
         setTaskData({ title: '', description: '', completed: false });
